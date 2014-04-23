@@ -68,19 +68,19 @@ func Rotate(axis, v [3]float64, angle float64) [3]float64 {
 	cosA := math.Cos(angle)
 	sinA := math.Sin(angle)
 	x, y, z := axis[0], axis[1], axis[2]
-	xx, yy, zz, xy, xz, yz := x * x, y * y, z * z, x * y, x * z, y * z
+	xx, yy, zz, xy, xz, yz := x*x, y*y, z*z, x*y, x*z, y*z
 	// http://en.wikipedia.org/wiki/Rotation_matrix#Axis_of_a_rotation
 	m := [3][3]float64{
-		{ xx + (1 - xx) * cosA, xy * (1 - cosA) + z * sinA, xz * (1 - cosA) - y * sinA },
-		{ xy * (1 - cosA) - z * sinA, yy + (1 - yy) * cosA, yz * (1 - cosA) + x * sinA },
-		{ xz * (1 - cosA) + y * sinA, yz * (1 - cosA) - x * sinA, zz + (1 - zz) * cosA },
+		{xx + (1-xx)*cosA, xy*(1-cosA) + z*sinA, xz*(1-cosA) - y*sinA},
+		{xy*(1-cosA) - z*sinA, yy + (1-yy)*cosA, yz*(1-cosA) + x*sinA},
+		{xz*(1-cosA) + y*sinA, yz*(1-cosA) - x*sinA, zz + (1-zz)*cosA},
 	}
 	return Mul_m_v_v(m, v)
 }
 
 func Det_m(m [3][3]float64) float64 {
-	return m[0][0] * m[1][1] * m[2][2] + m[1][0] * m[2][1] * m[0][2] + m[2][0] * m[0][1] * m[1][2] -
-			m[2][0] * m[1][1] * m[0][2] - m[0][0] * m[2][1] * m[1][2] - m[1][0] * m[0][1] * m[2][2]
+	return m[0][0]*m[1][1]*m[2][2] + m[1][0]*m[2][1]*m[0][2] + m[2][0]*m[0][1]*m[1][2] -
+		m[2][0]*m[1][1]*m[0][2] - m[0][0]*m[2][1]*m[1][2] - m[1][0]*m[0][1]*m[2][2]
 }
 
 func Inv_m(m [3][3]float64) [3][3]float64 {
@@ -96,3 +96,10 @@ func Inv_m(m [3][3]float64) [3][3]float64 {
 	}
 }
 
+func Add_v(v1 [3]float64, v2 [3]float64) [3]float64 {
+	return [3]float64{v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]}
+}
+
+func Mul_v(v [3]float64, k float64) [3]float64 {
+	return [3]float64{k * v[0], k * v[1], k * v[2]}
+}
