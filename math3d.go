@@ -100,6 +100,11 @@ func Add_v(v1 [3]float64, v2 [3]float64) [3]float64 {
 	return [3]float64{v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]}
 }
 
+func Neg_v(v [3]float64) [3]float64 {
+	return [3]float64{-v[0], -v[1], -v[2]}
+}
+
 func Mul_v(v [3]float64, k float64) [3]float64 {
 	return [3]float64{k * v[0], k * v[1], k * v[2]}
 }
+
